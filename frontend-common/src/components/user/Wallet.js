@@ -12,7 +12,7 @@ const WalletPage = () => {
     const fetchWalletBalance = async () => {
       try {
         const { data } = await axios.get(
-          "https://chronocrafts.xyz/api/v1/getWalletBalance",
+          "https://api.chronocrafts.xyz/api/v1/getWalletBalance",
           {
             withCredentials: true,
           }

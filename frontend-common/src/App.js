@@ -76,7 +76,7 @@ function App() {
     async function getStripeApiKey() {
       try {
         const { data } = await axios.get(
-          "https://chronocrafts.xyz/api/v1/stripeapi"
+          "https://api.chronocrafts.xyz/api/v1/stripeapi"
         );
         setstripeApiKey(data.stripeApiKey);
         return;

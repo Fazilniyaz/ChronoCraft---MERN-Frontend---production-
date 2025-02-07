@@ -18,7 +18,7 @@ export default function CouponForm() {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "https://chronocrafts.xyz/api/v1/createCoupon",
+        "https://api.chronocrafts.xyz/api/v1/createCoupon",
         couponData,
         {
           withCredentials: true,

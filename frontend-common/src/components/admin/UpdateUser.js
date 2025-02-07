@@ -108,7 +108,7 @@ export default function UpdateUser() {
   const handleUnBlock = () => {
     async function unblock() {
       const { data } = await axios.put(
-        `https://chronocrafts.xyz/api/v1/admin/userUnblock/${user._id}`,
+        `https://api.chronocrafts.xyz/api/v1/admin/userUnblock/${user._id}`,
         {
           withCredentials: true,
         }

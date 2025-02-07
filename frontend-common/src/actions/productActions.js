@@ -40,7 +40,7 @@ export const getProducts =
   async (dispatch) => {
     try {
       dispatch(productsRequest());
-      let link = `https://chronocrafts.xyz/api/v1/products?page=${currentPage}`;
+      let link = `https://api.chronocrafts.xyz/api/v1/products?page=${currentPage}`;
       if (keyword) {
         link += `&keyword=${keyword}`;
       }
@@ -72,7 +72,7 @@ export const getProduct = (id) => async (dispatch) => {
   try {
     dispatch(productRequest());
     const { data } = await axios.get(
-      `https://chronocrafts.xyz/api/v1/product/${id}`,
+      `https://api.chronocrafts.xyz/api/v1/product/${id}`,
       {
         withCredentials: true,
       }
@@ -90,7 +90,7 @@ export const getAdminProducts = async (dispatch) => {
   try {
     dispatch(adminProductsRequest());
     const { data } = await axios.get(
-      `https://chronocrafts.xyz/api/v1/admin/products`,
+      `https://api.chronocrafts.xyz/api/v1/admin/products`,
       {
         withCredentials: true,
       }
@@ -106,7 +106,7 @@ export const createNewProduct = (productData) => async (dispatch) => {
   try {
     dispatch(newProductRequest());
     const { data } = await axios.post(
-      `https://chronocrafts.xyz/api/v1/admin/product/new`,
+      `https://api.chronocrafts.xyz/api/v1/admin/product/new`,
       productData,
       {
         withCredentials: true,
@@ -122,9 +122,12 @@ export const createNewProduct = (productData) => async (dispatch) => {
 export const deleteProduct = (id) => async (dispatch) => {
   try {
     dispatch(deleteProductRequest());
-    await axios.delete(`https://chronocrafts.xyz/api/v1/admin/product/${id}`, {
-      withCredentials: true,
-    });
+    await axios.delete(
+      `https://api.chronocrafts.xyz/api/v1/admin/product/${id}`,
+      {
+        withCredentials: true,
+      }
+    );
     dispatch(deleteProductSuccess());
   } catch (error) {
     //handle error
@@ -139,7 +142,7 @@ export const createReview = (reviewData) => async (dispatch) => {
       headers: { "Content-type": "application/json" },
     };
     const { data } = await axios.put(
-      `https://chronocrafts.xyz/api/v1/review`,
+      `https://api.chronocrafts.xyz/api/v1/review`,
       reviewData,
       config,
       {
@@ -157,7 +160,7 @@ export const updateProduct = (id, productData) => async (dispatch) => {
   try {
     dispatch(updateProductRequest());
     const { data } = await axios.put(
-      `https://chronocrafts.xyz/api/v1/admin/product/${id}`,
+      `https://api.chronocrafts.xyz/api/v1/admin/product/${id}`,
       productData,
       {
         withCredentials: true,
@@ -174,7 +177,7 @@ export const updateProduct = (id, productData) => async (dispatch) => {
 export const enableProduct = (id) => async (dispatch) => {
   try {
     const { data } = await axios.get(
-      `https://chronocrafts.xyz/api/v1/admin/product/enable/${id}`,
+      `https://api.chronocrafts.xyz/api/v1/admin/product/enable/${id}`,
       {
         withCredentials: true,
       }
@@ -190,7 +193,7 @@ export const enableProduct = (id) => async (dispatch) => {
 export const disableProduct = (id) => async (dispatch) => {
   try {
     const { data } = await axios.get(
-      `https://chronocrafts.xyz/api/v1/admin/product/disable/${id}`,
+      `https://api.chronocrafts.xyz/api/v1/admin/product/disable/${id}`,
       {
         withCredentials: true,
       }

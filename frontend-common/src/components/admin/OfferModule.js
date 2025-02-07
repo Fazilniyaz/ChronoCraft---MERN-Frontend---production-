@@ -10,7 +10,7 @@ function OfferModule() {
   // Fetch categories from the backend (this could be static if you have predefined categories)
   useEffect(() => {
     axios
-      .get("https://chronocrafts.xyz/api/v1/admin/category", {
+      .get("https://api.chronocrafts.xyz/api/v1/admin/category", {
         withCredentials: true,
       }) // Adjust endpoint to fetch categories
 
@@ -27,7 +27,7 @@ function OfferModule() {
     // Send offer data to the backend
     axios
       .post(
-        "https://chronocrafts.xyz/api/v1/admin/applyOffer",
+        "https://api.chronocrafts.xyz/api/v1/admin/applyOffer",
         {
           offerPercentage,
           category,
@@ -45,7 +45,7 @@ function OfferModule() {
 
   const fetchOffers = () => {
     axios
-      .get("https://chronocrafts.xyz/api/v1/admin/getOffers", {
+      .get("https://api.chronocrafts.xyz/api/v1/admin/getOffers", {
         withCredentials: true,
       })
       .then((response) => setOffers(response.data))

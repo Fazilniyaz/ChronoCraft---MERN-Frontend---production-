@@ -26,7 +26,7 @@ export const createOrder = (order) => async (dispatch) => {
   try {
     dispatch(createOrderRequest());
     const { data } = await axios.post(
-      `https://chronocrafts.xyz/api/v1/order/new`,
+      `https://api.chronocrafts.xyz/api/v1/order/new`,
       order,
       {
         withCredentials: true,
@@ -45,7 +45,7 @@ export const userOrders = async (dispatch) => {
   try {
     dispatch(userOrdersRequest());
     const { data } = await axios.get(
-      `https://chronocrafts.xyz/api/v1/myorders`,
+      `https://api.chronocrafts.xyz/api/v1/myorders`,
       {
         withCredentials: true,
       }
@@ -59,7 +59,7 @@ export const orderDetail = (id) => async (dispatch) => {
   try {
     dispatch(orderDetailRequest());
     const { data } = await axios.get(
-      `https://chronocrafts.xyz/api/v1/order/${id}`,
+      `https://api.chronocrafts.xyz/api/v1/order/${id}`,
       {
         withCredentials: true,
       }
@@ -74,7 +74,7 @@ export const adminOrders = async (dispatch) => {
   try {
     dispatch(adminOrdersRequest());
     const { data } = await axios.get(
-      `https://chronocrafts.xyz/api/v1/admin/orders`,
+      `https://api.chronocrafts.xyz/api/v1/admin/orders`,
       {
         withCredentials: true,
       }
@@ -88,9 +88,12 @@ export const adminOrders = async (dispatch) => {
 export const deleteOrder = (id) => async (dispatch) => {
   try {
     dispatch(deleteOrdersRequest());
-    await axios.delete(`https://chronocrafts.xyz/api/v1/admin/order/${id}`, {
-      withCredentials: true,
-    });
+    await axios.delete(
+      `https://api.chronocrafts.xyz/api/v1/admin/order/${id}`,
+      {
+        withCredentials: true,
+      }
+    );
     dispatch(deleteOrdersSuccess());
   } catch (error) {
     dispatch(deleteOrdersFail(error.response.data.message));
@@ -101,7 +104,7 @@ export const updateOrder = (id, orderData) => async (dispatch) => {
   try {
     dispatch(updateOrdersRequest());
     const { data } = await axios.put(
-      `https://chronocrafts.xyz/api/v1/admin/order/${id}`,
+      `https://api.chronocrafts.xyz/api/v1/admin/order/${id}`,
       orderData,
       {
         withCredentials: true,

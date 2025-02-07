@@ -6,7 +6,7 @@ export const addCartItem = (id, quantity) => async (dispatch) => {
   try {
     dispatch(addCartItemRequest());
     const { data } = await axios.get(
-      `https://chronocrafts.xyz/api/v1/product/${id}`,
+      `https://api.chronocrafts.xyz/api/v1/product/${id}`,
       {
         withCredentials: true,
       }
@@ -33,7 +33,7 @@ export const addCartItemInDB =
       dispatch(addCartItemRequest());
 
       const { data } = await axios.post(
-        `https://chronocrafts.xyz/api/v1/createCartItem`,
+        `https://api.chronocrafts.xyz/api/v1/createCartItem`,
         {
           itemName,
           userId,

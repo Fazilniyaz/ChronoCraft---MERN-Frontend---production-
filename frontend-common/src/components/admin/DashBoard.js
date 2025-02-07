@@ -162,7 +162,7 @@ export default function Dashboard() {
   useEffect(() => {
     async function getOrdersCount() {
       const { data } = await axios.get(
-        `https://chronocrafts.xyz/api/v1/admin/getAllOrdersCount`,
+        `https://api.chronocrafts.xyz/api/v1/admin/getAllOrdersCount`,
         {
           withCredentials: true,
         }
@@ -175,7 +175,7 @@ export default function Dashboard() {
 
     async function getUsersCount() {
       const { data } = await axios.get(
-        `https://chronocrafts.xyz/api/v1/admin/GetCountOfUsers`,
+        `https://api.chronocrafts.xyz/api/v1/admin/GetCountOfUsers`,
         {
           withCredentials: true,
         }
@@ -188,7 +188,7 @@ export default function Dashboard() {
 
     async function getTotalSales() {
       const { data } = await axios.get(
-        `https://chronocrafts.xyz/api/v1/admin/salesReport?filterBy=yearly`,
+        `https://api.chronocrafts.xyz/api/v1/admin/salesReport?filterBy=yearly`,
         {
           withCredentials: true,
         }

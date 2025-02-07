@@ -52,7 +52,7 @@ export const login = (email, password) => async (dispatch) => {
     try {
       dispatch(loginRequest());
       const { data } = await axios.post(
-        "https://chronocrafts.xyz/api/v1/login",
+        "https://api.chronocrafts.xyz/api/v1/login",
         { email, password },
         { withCredentials: true }
       );
@@ -93,7 +93,7 @@ export const login = (email, password) => async (dispatch) => {
     try {
       dispatch(loginRequest());
       const { data } = await axios.post(
-        `https://chronocrafts.xyz/api/v1/google/signin`,
+        `https://api.chronocrafts.xyz/api/v1/google/signin`,
         {
           email,
         },
@@ -112,7 +112,7 @@ export const googleLogin = (email) => async (dispatch) => {
   try {
     dispatch(loginRequest());
     const { data } = await axios.post(
-      `https://chronocrafts.xyz/api/v1/google/signin`,
+      `https://api.chronocrafts.xyz/api/v1/google/signin`,
       {
         email,
       },
@@ -140,7 +140,7 @@ export const register = (userData) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      `https://chronocrafts.xyz/api/v1/register`,
+      `https://api.chronocrafts.xyz/api/v1/register`,
       userData,
       config,
       {
@@ -159,7 +159,7 @@ export const loadUser = async (dispatch) => {
     dispatch(loadUserRequest());
 
     const { data } = await axios.get(
-      `https://chronocrafts.xyz/api/v1/myprofile`,
+      `https://api.chronocrafts.xyz/api/v1/myprofile`,
       {
         withCredentials: true,
       }
@@ -172,7 +172,7 @@ export const loadUser = async (dispatch) => {
 
 export const logout = async (dispatch) => {
   try {
-    await axios.get(`https://chronocrafts.xyz/api/v1/logout`, {
+    await axios.get(`https://api.chronocrafts.xyz/api/v1/logout`, {
       withCredentials: true,
     });
     dispatch(logoutSuccess());
@@ -191,7 +191,7 @@ export const updateProfile = (userData) => async (dispatch) => {
     };
 
     const { data } = await axios.put(
-      `https://chronocrafts.xyz/api/v1/update`,
+      `https://api.chronocrafts.xyz/api/v1/update`,
       userData,
       config,
       {
@@ -213,7 +213,7 @@ export const updatePassword = (formData) => async (dispatch) => {
       },
     };
     await axios.put(
-      `https://chronocrafts.xyz/api/v1/password/change`,
+      `https://api.chronocrafts.xyz/api/v1/password/change`,
       formData,
       config,
       {
@@ -235,7 +235,7 @@ export const forgotPassword = (formData) => async (dispatch) => {
       },
     };
     const { data } = await axios.post(
-      `https://chronocrafts.xyz/api/v1/password/forgot`,
+      `https://api.chronocrafts.xyz/api/v1/password/forgot`,
       formData,
       config,
       {
@@ -257,7 +257,7 @@ export const resetPassword = (formData, token) => async (dispatch) => {
       },
     };
     const { data } = await axios.post(
-      `https://chronocrafts.xyz/api/v1/password/reset/${token}`,
+      `https://api.chronocrafts.xyz/api/v1/password/reset/${token}`,
       formData,
       config,
       {
@@ -274,7 +274,7 @@ export const getUsers = async (dispatch) => {
   try {
     dispatch(usersRequest());
     const { data } = await axios.get(
-      `https://chronocrafts.xyz/api/v1/admin/users`,
+      `https://api.chronocrafts.xyz/api/v1/admin/users`,
       {
         withCredentials: true,
       }
@@ -289,7 +289,7 @@ export const getUser = (id) => async (dispatch) => {
   try {
     dispatch(userRequest());
     const { data } = await axios.get(
-      `https://chronocrafts.xyz/api/v1/admin/user/${id}`,
+      `https://api.chronocrafts.xyz/api/v1/admin/user/${id}`,
       {
         withCredentials: true,
       }
@@ -303,7 +303,7 @@ export const getUser = (id) => async (dispatch) => {
 export const deleteUser = (id) => async (dispatch) => {
   try {
     dispatch(deleteUserRequest());
-    await axios.delete(`https://chronocrafts.xyz/api/v1/admin/user/${id}`, {
+    await axios.delete(`https://api.chronocrafts.xyz/api/v1/admin/user/${id}`, {
       withCredentials: true,
     });
     dispatch(deleteUserSuccess());
@@ -321,7 +321,7 @@ export const updateUser = (id, formData) => async (dispatch) => {
       },
     };
     await axios.put(
-      `https://chronocrafts.xyz/api/v1/admin/user/${id}`,
+      `https://api.chronocrafts.xyz/api/v1/admin/user/${id}`,
       formData,
       config,
       {
@@ -336,9 +336,12 @@ export const updateUser = (id, formData) => async (dispatch) => {
 
 export const blockUser = (id) => async (dispatch) => {
   try {
-    await axios.put(`https://chronocrafts.xyz/api/v1/admin/userBlock/${id}`, {
-      withCredentials: true,
-    });
+    await axios.put(
+      `https://api.chronocrafts.xyz/api/v1/admin/userBlock/${id}`,
+      {
+        withCredentials: true,
+      }
+    );
 
     toast.success("User blocked successfully!", {
       position: "bottom-center",
@@ -359,7 +362,7 @@ export const verifyOtp = (email) => async (dispatch) => {
       },
     };
     const { data } = await axios.post(
-      `https://chronocrafts.xyz/api/v1/register/otp`,
+      `https://api.chronocrafts.xyz/api/v1/register/otp`,
       email,
       config,
       {

@@ -101,7 +101,7 @@ export default function Register() {
     try {
       // Check if the email exists in the database
       const response = await axios.post(
-        "https://chronocrafts.xyz/api/v1/checkEmailExistence",
+        "https://api.chronocrafts.xyz/api/v1/checkEmailExistence",
         {
           email,
         },

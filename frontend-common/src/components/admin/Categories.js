@@ -20,7 +20,7 @@ export default function Categories() {
   const fetchCategories = async () => {
     try {
       const { data } = await axios.get(
-        "https://chronocrafts.xyz/api/v1/user/category",
+        "https://api.chronocrafts.xyz/api/v1/user/category",
         {
           withCredentials: true,
         }
@@ -38,7 +38,7 @@ export default function Categories() {
         return;
       }
       const { data } = await axios.post(
-        "https://chronocrafts.xyz/api/v1/admin/category",
+        "https://api.chronocrafts.xyz/api/v1/admin/category",
         {
           name: newCategory.trim(),
         },
@@ -57,7 +57,7 @@ export default function Categories() {
   const saveEditCategory = async () => {
     try {
       const { data } = await axios.put(
-        `https://chronocrafts.xyz/api/v1/admin/category/${editingCategory._id}`,
+        `https://api.chronocrafts.xyz/api/v1/admin/category/${editingCategory._id}`,
         { name: editCategoryName.trim() },
         {
           withCredentials: true,
@@ -75,8 +75,8 @@ export default function Categories() {
   const toggleCategoryStatus = async (id, isActive) => {
     try {
       const endpoint = isActive
-        ? `https://chronocrafts.xyz/api/v1/admin/category/disable/${id}`
-        : `https://chronocrafts.xyz/api/v1/admin/category/enable/${id}`;
+        ? `https://api.chronocrafts.xyz/api/v1/admin/category/disable/${id}`
+        : `https://api.chronocrafts.xyz/api/v1/admin/category/enable/${id}`;
       const { data } = await axios.patch(endpoint, {
         withCredentials: true,
       });

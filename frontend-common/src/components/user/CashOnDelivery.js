@@ -65,7 +65,7 @@ function CashOnDelivery() {
   useEffect(() => {
     async function getItemsFromDB() {
       const { data } = await axios.get(
-        `https://chronocrafts.xyz/api/v1/CartProductsOfSingleUser/${userId}`,
+        `https://api.chronocrafts.xyz/api/v1/CartProductsOfSingleUser/${userId}`,
         {
           withCredentials: true,
         }

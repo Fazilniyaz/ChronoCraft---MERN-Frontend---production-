@@ -114,7 +114,7 @@ function ProductDetails() {
     const fetchCartItems = async () => {
       try {
         const { data } = await axios.get(
-          `https://chronocrafts.xyz/api/v1/CartProductsOfSingleUser/${userId}`,
+          `https://api.chronocrafts.xyz/api/v1/CartProductsOfSingleUser/${userId}`,
           {
             withCredentials: true,
           }
@@ -128,7 +128,7 @@ function ProductDetails() {
     async function getWishlistedProducts() {
       try {
         const { data } = await axios.get(
-          `https://chronocrafts.xyz/api/v1/getUserWishList/${userId}`,
+          `https://api.chronocrafts.xyz/api/v1/getUserWishList/${userId}`,
           {
             withCredentials: true,
           }
@@ -147,7 +147,7 @@ function ProductDetails() {
 
   async function AddToWishList(userId, productId) {
     const { data } = await axios.post(
-      `https://chronocrafts.xyz/api/v1/addToWishList`,
+      `https://api.chronocrafts.xyz/api/v1/addToWishList`,
       {
         userId,
         productId,
@@ -165,7 +165,7 @@ function ProductDetails() {
   }
   async function RemoveProductFromWishList(userId, productId) {
     const { data } = await axios.post(
-      `https://chronocrafts.xyz/api/v1/deleteProductFromWishList`,
+      `https://api.chronocrafts.xyz/api/v1/deleteProductFromWishList`,
       {
         userId,
         productId,
@@ -233,7 +233,7 @@ function ProductDetails() {
     }
     try {
       const { data } = await axios.post(
-        `https://chronocrafts.xyz/api/v1/applyCoupons`,
+        `https://api.chronocrafts.xyz/api/v1/applyCoupons`,
         {
           code: ids.value,
           userId,

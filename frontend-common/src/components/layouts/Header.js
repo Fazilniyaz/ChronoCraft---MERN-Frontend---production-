@@ -27,7 +27,7 @@ function Header() {
       if (user && userId) {
         try {
           const { data } = await axios.get(
-            `https://chronocrafts.xyz/api/v1/CartProductsOfSingleUser/${userId}`,
+            `https://api.chronocrafts.xyz/api/v1/CartProductsOfSingleUser/${userId}`,
             {
               withCredentials: true,
             }

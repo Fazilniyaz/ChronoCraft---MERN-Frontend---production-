@@ -10,7 +10,7 @@ export default function CouponTable() {
     const fetchCoupons = async () => {
       try {
         const { data } = await axios.get(
-          "https://chronocrafts.xyz/api/v1/coupons",
+          "https://api.chronocrafts.xyz/api/v1/coupons",
           {
             withCredentials: true,
           }
@@ -30,7 +30,7 @@ export default function CouponTable() {
     if (window.confirm("Are you sure you want to delete this coupon?")) {
       try {
         await axios.delete(
-          `https://chronocrafts.xyz/api/v1/delete/${couponId}`,
+          `https://api.chronocrafts.xyz/api/v1/delete/${couponId}`,
           {
             withCredentials: true,
           }

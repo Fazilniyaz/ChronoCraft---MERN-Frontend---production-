@@ -36,7 +36,7 @@ const CartPage = () => {
         await setBoolean(false);
 
         const { data } = await axios.get(
-          `https://chronocrafts.xyz/api/v1/CartProductsOfSingleUser/${userId}`,
+          `https://api.chronocrafts.xyz/api/v1/CartProductsOfSingleUser/${userId}`,
           {
             withCredentials: true,
           }
@@ -55,7 +55,7 @@ const CartPage = () => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(
-        `https://chronocrafts.xyz/api/v1/deleteCartItem/${id}`,
+        `https://api.chronocrafts.xyz/api/v1/deleteCartItem/${id}`,
         {
           withCredentials: true,
         }

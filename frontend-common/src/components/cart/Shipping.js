@@ -276,7 +276,7 @@ export default function Shipping() {
     if (userAddedExistingAddress == false) {
       async function addNewAddress() {
         await axios.post(
-          "https://chronocrafts.xyz/api/v1/createAddress",
+          "https://api.chronocrafts.xyz/api/v1/createAddress",
           addressForm,
           {
             withCredentials: true,

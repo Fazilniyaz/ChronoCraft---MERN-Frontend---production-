@@ -18,7 +18,7 @@ const Stats = () => {
     const fetchStats = async () => {
       try {
         const { data } = await axios.get(
-          `https://chronocrafts.xyz/api/v1/admin/getTopSellingStats`,
+          `https://api.chronocrafts.xyz/api/v1/admin/getTopSellingStats`,
           {
             withCredentials: true,
           }

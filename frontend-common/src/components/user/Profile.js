@@ -24,7 +24,7 @@ export default function Profile() {
     const fetchAddresses = async () => {
       try {
         const { data } = await axios.get(
-          "https://chronocrafts.xyz/api/v1/getAllAddresses",
+          "https://api.chronocrafts.xyz/api/v1/getAllAddresses",
           {
             withCredentials: true,
           }
@@ -48,7 +48,7 @@ export default function Profile() {
     try {
       if (isEditing) {
         await axios.put(
-          `https://chronocrafts.xyz/api/v1/updateAddress/${addressForm.id}`,
+          `https://api.chronocrafts.xyz/api/v1/updateAddress/${addressForm.id}`,
           addressForm,
           {
             withCredentials: true,
@@ -59,7 +59,7 @@ export default function Profile() {
         });
       } else {
         await axios.post(
-          "https://chronocrafts.xyz/api/v1/createAddress",
+          "https://api.chronocrafts.xyz/api/v1/createAddress",
           addressForm,
           {
             withCredentials: true,
@@ -72,7 +72,7 @@ export default function Profile() {
 
       // Refresh addresses
       const { data } = await axios.get(
-        "https://chronocrafts.xyz/api/v1/getAllAddresses",
+        "https://api.chronocrafts.xyz/api/v1/getAllAddresses",
         {
           withCredentials: true,
         }
@@ -98,7 +98,7 @@ export default function Profile() {
   const handleDeleteAddress = async (id) => {
     try {
       await axios.delete(
-        `https://chronocrafts.xyz/api/v1/deleteAddress/${id}`,
+        `https://api.chronocrafts.xyz/api/v1/deleteAddress/${id}`,
         {
           withCredentials: true,
         }

@@ -14,7 +14,7 @@ const CategoryPage = () => {
     const fetchCategoryProducts = async () => {
       try {
         const { data } = await axios.get(
-          `https://chronocrafts.xyz/api/v1/products?category=${categoryName}`,
+          `https://api.chronocrafts.xyz/api/v1/products?category=${categoryName}`,
           {
             withCredentials: true,
           }
