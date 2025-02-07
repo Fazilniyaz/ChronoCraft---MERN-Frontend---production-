@@ -52,9 +52,11 @@ export const login = (email, password) => async (dispatch) => {
     try {
       dispatch(loginRequest());
       const { data } = await axios.post(
-        `https://chronocrafts.xyz/api/v1/login`,
-        { email, password }
+        "https://chronocrafts.xyz/api/v1/login",
+        { email, password },
+        { withCredentials: true }
       );
+
       if (data.message == "User is blocked") {
         console.log("User blocked");
         toast("You are blocked by admin!", {
