@@ -37,6 +37,9 @@ export const addCartItemInDB =
           productId,
           quantity,
           overallPrice,
+        },
+        {
+          withCredentials: true,
         }
       );
 
