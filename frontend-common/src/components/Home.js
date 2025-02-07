@@ -39,7 +39,7 @@ export const Home = () => {
     const fetchCategories = async () => {
       try {
         const { data } = await axios.get(
-          "https://chronocrafts.xyz/api/v1/user/category",
+          "https://api.chronocrafts.xyz/api/v1/user/category",
           {
             withCredentials: true,
           }
