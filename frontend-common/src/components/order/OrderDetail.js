@@ -52,7 +52,10 @@ export default function OrderDetail() {
     async function fetchOrderDetails() {
       try {
         const { data } = await axios.get(
-          `https://chronocrafts.xyz/api/v1/order/${id}`
+          `https://chronocrafts.xyz/api/v1/order/${id}`,
+          {
+            withCredentials: true,
+          }
         );
         setOrder(data.order);
         setBoolean(true);
@@ -68,7 +71,10 @@ export default function OrderDetail() {
     async function getAllCartItems() {
       try {
         const { data } = await axios.get(
-          `https://chronocrafts.xyz/api/v1/CartProductsOfSingleUser/${userId}`
+          `https://chronocrafts.xyz/api/v1/CartProductsOfSingleUser/${userId}`,
+          {
+            withCredentials: true,
+          }
         );
         setCartItems(data.cartItems);
         setBoolean2(true);
@@ -96,7 +102,10 @@ export default function OrderDetail() {
       try {
         const { data } = await axios.post(
           `https://chronocrafts.xyz/api/v1/ReturnOrCancelOrder`,
-          cancelData
+          cancelData,
+          {
+            withCredentials: true,
+          }
         );
         toast("Order Return request Submitted!", {
           type: "success",
@@ -168,7 +177,10 @@ export default function OrderDetail() {
       try {
         const { data } = await axios.post(
           `https://chronocrafts.xyz/api/v1/ReturnOrCancelOrder`,
-          returnData
+          returnData,
+          {
+            withCredentials: true,
+          }
         );
         toast("Order Return request Submitted!", {
           type: "success",

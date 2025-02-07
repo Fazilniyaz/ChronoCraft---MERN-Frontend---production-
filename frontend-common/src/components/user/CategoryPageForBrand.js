@@ -14,7 +14,10 @@ const CategoryPageForBrand = () => {
     const fetchBrands = async () => {
       try {
         const { data } = await axios.get(
-          `https://chronocrafts.xyz/api/v1/products?keyword=${brandName}`
+          `https://chronocrafts.xyz/api/v1/products?keyword=${brandName}`,
+          {
+            withCredentials: true,
+          }
         );
         setProducts(data.products);
         setLoading(false);

@@ -20,7 +20,10 @@ export default function Categories() {
   const fetchCategories = async () => {
     try {
       const { data } = await axios.get(
-        "https://chronocrafts.xyz/api/v1/user/category"
+        "https://chronocrafts.xyz/api/v1/user/category",
+        {
+          withCredentials: true,
+        }
       );
       setCategories(data.categories);
     } catch (error) {
@@ -38,6 +41,9 @@ export default function Categories() {
         "https://chronocrafts.xyz/api/v1/admin/category",
         {
           name: newCategory.trim(),
+        },
+        {
+          withCredentials: true,
         }
       );
       toast.success(data.message);
@@ -52,7 +58,10 @@ export default function Categories() {
     try {
       const { data } = await axios.put(
         `https://chronocrafts.xyz/api/v1/admin/category/${editingCategory._id}`,
-        { name: editCategoryName.trim() }
+        { name: editCategoryName.trim() },
+        {
+          withCredentials: true,
+        }
       );
       toast.success(data.message);
       setEditingCategory(null);
@@ -68,7 +77,9 @@ export default function Categories() {
       const endpoint = isActive
         ? `https://chronocrafts.xyz/api/v1/admin/category/disable/${id}`
         : `https://chronocrafts.xyz/api/v1/admin/category/enable/${id}`;
-      const { data } = await axios.patch(endpoint);
+      const { data } = await axios.patch(endpoint, {
+        withCredentials: true,
+      });
       toast.success(data.message);
       fetchCategories();
     } catch (error) {

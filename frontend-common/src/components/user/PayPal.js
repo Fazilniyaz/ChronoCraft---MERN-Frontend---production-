@@ -64,7 +64,10 @@ function Paypal() {
   useEffect(() => {
     async function getItemsFromDB() {
       const { data } = await axios.get(
-        `https://chronocrafts.xyz/api/v1/CartProductsOfSingleUser/${userId}`
+        `https://chronocrafts.xyz/api/v1/CartProductsOfSingleUser/${userId}`,
+        {
+          withCredentials: true,
+        }
       );
       setCartItemsFromDB(data.cartItems);
       setBoolean(true);
@@ -82,6 +85,9 @@ function Paypal() {
           {
             amount: order.totalPrice,
             shipping: order.shippingInfo,
+          },
+          {
+            withCredentials: true,
           }
         );
         console.log(data);

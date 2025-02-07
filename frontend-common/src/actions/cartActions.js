@@ -6,7 +6,10 @@ export const addCartItem = (id, quantity) => async (dispatch) => {
   try {
     dispatch(addCartItemRequest());
     const { data } = await axios.get(
-      `https://chronocrafts.xyz/api/v1/product/${id}`
+      `https://chronocrafts.xyz/api/v1/product/${id}`,
+      {
+        withCredentials: true,
+      }
     );
 
     dispatch(

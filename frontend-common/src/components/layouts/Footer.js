@@ -30,7 +30,10 @@ export const Footer = () => {
         }
 
         const { data } = await axios.get(
-          `https://chronocrafts.xyz/api/v1/admin/category`
+          `https://chronocrafts.xyz/api/v1/admin/category`,
+          {
+            withCredentials: true,
+          }
         );
         console.log(data);
         const activeCategories = data.categories.filter(

@@ -57,7 +57,9 @@ export const getProducts =
         link += `&gender=${gender}`;
       }
       dispatch(productsRequest());
-      const { data } = await axios.get(link);
+      const { data } = await axios.get(link, {
+        withCredentials: true,
+      });
       dispatch(productsSuccess(data));
       console.log("called");
     } catch (error) {
@@ -70,7 +72,10 @@ export const getProduct = (id) => async (dispatch) => {
   try {
     dispatch(productRequest());
     const { data } = await axios.get(
-      `https://chronocrafts.xyz/api/v1/product/${id}`
+      `https://chronocrafts.xyz/api/v1/product/${id}`,
+      {
+        withCredentials: true,
+      }
     ); // The URL is correct
     console.log(data);
     dispatch(productSuccess(data));
@@ -85,7 +90,10 @@ export const getAdminProducts = async (dispatch) => {
   try {
     dispatch(adminProductsRequest());
     const { data } = await axios.get(
-      `https://chronocrafts.xyz/api/v1/admin/products`
+      `https://chronocrafts.xyz/api/v1/admin/products`,
+      {
+        withCredentials: true,
+      }
     );
     dispatch(adminProductsSuccess(data));
   } catch (error) {
@@ -99,7 +107,10 @@ export const createNewProduct = (productData) => async (dispatch) => {
     dispatch(newProductRequest());
     const { data } = await axios.post(
       `https://chronocrafts.xyz/api/v1/admin/product/new`,
-      productData
+      productData,
+      {
+        withCredentials: true,
+      }
     );
     dispatch(newProductSuccess(data));
   } catch (error) {
@@ -111,7 +122,9 @@ export const createNewProduct = (productData) => async (dispatch) => {
 export const deleteProduct = (id) => async (dispatch) => {
   try {
     dispatch(deleteProductRequest());
-    await axios.delete(`https://chronocrafts.xyz/api/v1/admin/product/${id}`);
+    await axios.delete(`https://chronocrafts.xyz/api/v1/admin/product/${id}`, {
+      withCredentials: true,
+    });
     dispatch(deleteProductSuccess());
   } catch (error) {
     //handle error
@@ -128,7 +141,10 @@ export const createReview = (reviewData) => async (dispatch) => {
     const { data } = await axios.put(
       `https://chronocrafts.xyz/api/v1/review`,
       reviewData,
-      config
+      config,
+      {
+        withCredentials: true,
+      }
     );
     dispatch(createReviewSuccess(data));
   } catch (error) {
@@ -142,7 +158,10 @@ export const updateProduct = (id, productData) => async (dispatch) => {
     dispatch(updateProductRequest());
     const { data } = await axios.put(
       `https://chronocrafts.xyz/api/v1/admin/product/${id}`,
-      productData
+      productData,
+      {
+        withCredentials: true,
+      }
     );
     dispatch(updateProductSuccess(data));
   } catch (error) {
@@ -155,7 +174,10 @@ export const updateProduct = (id, productData) => async (dispatch) => {
 export const enableProduct = (id) => async (dispatch) => {
   try {
     const { data } = await axios.get(
-      `https://chronocrafts.xyz/api/v1/admin/product/enable/${id}`
+      `https://chronocrafts.xyz/api/v1/admin/product/enable/${id}`,
+      {
+        withCredentials: true,
+      }
     );
     toast.success(data.message, { position: "bottom-center" });
   } catch (error) {
@@ -168,7 +190,10 @@ export const enableProduct = (id) => async (dispatch) => {
 export const disableProduct = (id) => async (dispatch) => {
   try {
     const { data } = await axios.get(
-      `https://chronocrafts.xyz/api/v1/admin/product/disable/${id}`
+      `https://chronocrafts.xyz/api/v1/admin/product/disable/${id}`,
+      {
+        withCredentials: true,
+      }
     );
     toast.success(data.message, { position: "bottom-center" });
   } catch (error) {

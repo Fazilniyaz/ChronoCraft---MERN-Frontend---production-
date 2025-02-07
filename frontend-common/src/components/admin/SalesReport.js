@@ -18,7 +18,9 @@ export default function SalesReport() {
           url += `&startDate=${startDate}&endDate=${endDate}`;
         }
 
-        const { data } = await axios.get(url);
+        const { data } = await axios.get(url, {
+          withCredentials: true,
+        });
         setOrders(data.orders);
         setTotalSales(data.totalAmount);
       } catch (error) {

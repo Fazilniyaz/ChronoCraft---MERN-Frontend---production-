@@ -114,7 +114,10 @@ function ProductDetails() {
     const fetchCartItems = async () => {
       try {
         const { data } = await axios.get(
-          `https://chronocrafts.xyz/api/v1/CartProductsOfSingleUser/${userId}`
+          `https://chronocrafts.xyz/api/v1/CartProductsOfSingleUser/${userId}`,
+          {
+            withCredentials: true,
+          }
         );
         setCartItems(data.cartItems);
         setBoolean(true);
@@ -125,7 +128,10 @@ function ProductDetails() {
     async function getWishlistedProducts() {
       try {
         const { data } = await axios.get(
-          `https://chronocrafts.xyz/api/v1/getUserWishList/${userId}`
+          `https://chronocrafts.xyz/api/v1/getUserWishList/${userId}`,
+          {
+            withCredentials: true,
+          }
         );
         console.log(data, "WishListedItems");
         setProducts(data.products);
@@ -145,6 +151,9 @@ function ProductDetails() {
       {
         userId,
         productId,
+      },
+      {
+        withCredentials: true,
       }
     );
     setBoolean(false);
@@ -160,6 +169,9 @@ function ProductDetails() {
       {
         userId,
         productId,
+      },
+      {
+        withCredentials: true,
       }
     );
     setBoolean(false);
@@ -226,6 +238,9 @@ function ProductDetails() {
           code: ids.value,
           userId,
           productId: product._id,
+        },
+        {
+          withCredentials: true,
         }
       );
       if (data.success == true) {

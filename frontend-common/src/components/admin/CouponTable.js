@@ -10,7 +10,10 @@ export default function CouponTable() {
     const fetchCoupons = async () => {
       try {
         const { data } = await axios.get(
-          "https://chronocrafts.xyz/api/v1/coupons"
+          "https://chronocrafts.xyz/api/v1/coupons",
+          {
+            withCredentials: true,
+          }
         );
         setCoupons(data.coupons);
       } catch (error) {
@@ -27,7 +30,10 @@ export default function CouponTable() {
     if (window.confirm("Are you sure you want to delete this coupon?")) {
       try {
         await axios.delete(
-          `https://chronocrafts.xyz/api/v1/delete/${couponId}`
+          `https://chronocrafts.xyz/api/v1/delete/${couponId}`,
+          {
+            withCredentials: true,
+          }
         );
         toast.success("Coupon deleted successfully.");
         setCoupons(coupons.filter((coupon) => coupon._id !== couponId)); // Update state

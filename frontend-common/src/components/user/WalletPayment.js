@@ -66,7 +66,10 @@ function WalletPayment() {
   useEffect(() => {
     async function getItemsFromDB() {
       const { data } = await axios.get(
-        `https://chronocrafts.xyz/api/v1/CartProductsOfSingleUser/${userId}`
+        `https://chronocrafts.xyz/api/v1/CartProductsOfSingleUser/${userId}`,
+        {
+          withCredentials: true,
+        }
       );
       setCartItemsFromDB(data.cartItems);
       setBoolean(true);
@@ -75,7 +78,10 @@ function WalletPayment() {
 
     async function getWalletBalance() {
       const { data } = await axios.get(
-        `https://chronocrafts.xyz/api/v1/getWalletBalance`
+        `https://chronocrafts.xyz/api/v1/getWalletBalance`,
+        {
+          withCredentials: true,
+        }
       );
       setWalletBalance(data);
     }
@@ -96,6 +102,9 @@ function WalletPayment() {
         `https://chronocrafts.xyz/api/v1/handleWallet`,
         {
           reducingAmountFromWallet: total,
+        },
+        {
+          withCredentials: true,
         }
       );
       if (data.success == true) {

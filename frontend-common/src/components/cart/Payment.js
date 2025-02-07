@@ -71,7 +71,10 @@ export default function Payment() {
   useEffect(() => {
     async function getItemsFromDB() {
       const { data } = await axios.get(
-        `https://chronocrafts.xyz/api/v1/CartProductsOfSingleUser/${userId}`
+        `https://chronocrafts.xyz/api/v1/CartProductsOfSingleUser/${userId}`,
+        {
+          withCredentials: true,
+        }
       );
       setCartItemsFromDB(data.cartItems);
       setBoolean(true);
@@ -103,7 +106,10 @@ export default function Payment() {
     try {
       const { data } = await axios.post(
         "https://chronocrafts.xyz/api/v1/payment/process",
-        paymentData
+        paymentData,
+        {
+          withCredentials: true,
+        }
       );
       const clientSecret = data.client_secret;
       const result = await stripe.confirmCardPayment(clientSecret, {

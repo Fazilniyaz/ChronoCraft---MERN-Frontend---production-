@@ -12,7 +12,10 @@ const WalletPage = () => {
     const fetchWalletBalance = async () => {
       try {
         const { data } = await axios.get(
-          "https://chronocrafts.xyz/api/v1/getWalletBalance"
+          "https://chronocrafts.xyz/api/v1/getWalletBalance",
+          {
+            withCredentials: true,
+          }
         ); // Replace with your endpoint
         setWalletBalance(data.wallet);
       } catch (err) {

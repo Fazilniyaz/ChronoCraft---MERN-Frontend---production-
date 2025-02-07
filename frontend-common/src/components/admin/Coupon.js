@@ -19,7 +19,10 @@ export default function CouponForm() {
     try {
       const { data } = await axios.post(
         "https://chronocrafts.xyz/api/v1/createCoupon",
-        couponData
+        couponData,
+        {
+          withCredentials: true,
+        }
       );
       toast.success(data.message);
       setCouponData({ code: "", discount: "", expiryDate: "" }); // Reset form

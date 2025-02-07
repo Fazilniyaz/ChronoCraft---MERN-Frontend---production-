@@ -27,7 +27,10 @@ export const createOrder = (order) => async (dispatch) => {
     dispatch(createOrderRequest());
     const { data } = await axios.post(
       `https://chronocrafts.xyz/api/v1/order/new`,
-      order
+      order,
+      {
+        withCredentials: true,
+      }
     );
     dispatch(createOrderSuccess(data));
   } catch (error) {
@@ -42,7 +45,10 @@ export const userOrders = async (dispatch) => {
   try {
     dispatch(userOrdersRequest());
     const { data } = await axios.get(
-      `https://chronocrafts.xyz/api/v1/myorders`
+      `https://chronocrafts.xyz/api/v1/myorders`,
+      {
+        withCredentials: true,
+      }
     );
     dispatch(userOrdersSuccess(data));
   } catch (error) {
@@ -53,7 +59,10 @@ export const orderDetail = (id) => async (dispatch) => {
   try {
     dispatch(orderDetailRequest());
     const { data } = await axios.get(
-      `https://chronocrafts.xyz/api/v1/order/${id}`
+      `https://chronocrafts.xyz/api/v1/order/${id}`,
+      {
+        withCredentials: true,
+      }
     );
     dispatch(orderDetailSuccess(data));
   } catch (error) {
@@ -65,7 +74,10 @@ export const adminOrders = async (dispatch) => {
   try {
     dispatch(adminOrdersRequest());
     const { data } = await axios.get(
-      `https://chronocrafts.xyz/api/v1/admin/orders`
+      `https://chronocrafts.xyz/api/v1/admin/orders`,
+      {
+        withCredentials: true,
+      }
     );
     dispatch(adminOrdersSuccess(data));
   } catch (error) {
@@ -76,7 +88,9 @@ export const adminOrders = async (dispatch) => {
 export const deleteOrder = (id) => async (dispatch) => {
   try {
     dispatch(deleteOrdersRequest());
-    await axios.delete(`https://chronocrafts.xyz/api/v1/admin/order/${id}`);
+    await axios.delete(`https://chronocrafts.xyz/api/v1/admin/order/${id}`, {
+      withCredentials: true,
+    });
     dispatch(deleteOrdersSuccess());
   } catch (error) {
     dispatch(deleteOrdersFail(error.response.data.message));
@@ -88,7 +102,10 @@ export const updateOrder = (id, orderData) => async (dispatch) => {
     dispatch(updateOrdersRequest());
     const { data } = await axios.put(
       `https://chronocrafts.xyz/api/v1/admin/order/${id}`,
-      orderData
+      orderData,
+      {
+        withCredentials: true,
+      }
     );
     dispatch(updateOrdersSuccess());
   } catch (error) {

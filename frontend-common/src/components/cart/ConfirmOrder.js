@@ -87,7 +87,10 @@ function ConfirmOrder() {
     async function getAllCartItemsOfTheParticularUser() {
       try {
         const { data } = await axios.get(
-          `https://chronocrafts.xyz/api/v1/CartProductsOfSingleUser/${userId}`
+          `https://chronocrafts.xyz/api/v1/CartProductsOfSingleUser/${userId}`,
+          {
+            withCredentials: true,
+          }
         );
         setCartItemsFromDB(data.cartItems);
         setIsLoading(false); // Data fetched, stop loading

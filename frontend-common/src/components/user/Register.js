@@ -104,6 +104,9 @@ export default function Register() {
         "https://chronocrafts.xyz/api/v1/checkEmailExistence",
         {
           email,
+        },
+        {
+          withCredentials: true,
         }
       );
 

@@ -10,7 +10,9 @@ function OfferModule() {
   // Fetch categories from the backend (this could be static if you have predefined categories)
   useEffect(() => {
     axios
-      .get("https://chronocrafts.xyz/api/v1/admin/category") // Adjust endpoint to fetch categories
+      .get("https://chronocrafts.xyz/api/v1/admin/category", {
+        withCredentials: true,
+      }) // Adjust endpoint to fetch categories
 
       .then((response) => {
         setCategories(response.data.categories);
@@ -24,10 +26,16 @@ function OfferModule() {
 
     // Send offer data to the backend
     axios
-      .post("https://chronocrafts.xyz/api/v1/admin/applyOffer", {
-        offerPercentage,
-        category,
-      })
+      .post(
+        "https://chronocrafts.xyz/api/v1/admin/applyOffer",
+        {
+          offerPercentage,
+          category,
+        },
+        {
+          withCredentials: true,
+        }
+      )
       .then((response) => {
         console.log("Offer Applied: ", response.data);
         // Optionally, fetch the updated offers after successful submission
@@ -37,7 +45,9 @@ function OfferModule() {
 
   const fetchOffers = () => {
     axios
-      .get("https://chronocrafts.xyz/api/v1/admin/getOffers")
+      .get("https://chronocrafts.xyz/api/v1/admin/getOffers", {
+        withCredentials: true,
+      })
       .then((response) => setOffers(response.data))
       .catch((error) => console.error("Error fetching offers:", error));
   };

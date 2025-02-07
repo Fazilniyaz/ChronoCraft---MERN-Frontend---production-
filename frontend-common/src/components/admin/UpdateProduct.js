@@ -85,7 +85,10 @@ export default function UpdateProduct() {
     const fetchCategories = async () => {
       try {
         const { data } = await axios.get(
-          "https://chronocrafts.xyz/api/v1/admin/category"
+          "https://chronocrafts.xyz/api/v1/admin/category",
+          {
+            withCredentials: true,
+          }
         );
         if (data.success) {
           console.log(data);

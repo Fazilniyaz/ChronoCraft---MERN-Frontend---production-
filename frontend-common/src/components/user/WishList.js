@@ -16,7 +16,10 @@ export default function WishList() {
     async function getWishlistedProducts() {
       try {
         const { data } = await axios.get(
-          `https://chronocrafts.xyz/api/v1/getUserWishList/${userId}`
+          `https://chronocrafts.xyz/api/v1/getUserWishList/${userId}`,
+          {
+            withCredentials: true,
+          }
         );
         setProducts(data.products);
         setLoading(false);

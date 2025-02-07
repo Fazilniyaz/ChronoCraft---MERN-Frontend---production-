@@ -18,7 +18,10 @@ const Stats = () => {
     const fetchStats = async () => {
       try {
         const { data } = await axios.get(
-          `https://chronocrafts.xyz/api/v1/admin/getTopSellingStats`
+          `https://chronocrafts.xyz/api/v1/admin/getTopSellingStats`,
+          {
+            withCredentials: true,
+          }
         ); // Replace with your actual endpoint
         console.log(data.data);
         setTopProducts(data.data.topProducts);

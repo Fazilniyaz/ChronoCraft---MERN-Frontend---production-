@@ -24,7 +24,10 @@ export default function Profile() {
     const fetchAddresses = async () => {
       try {
         const { data } = await axios.get(
-          "https://chronocrafts.xyz/api/v1/getAllAddresses"
+          "https://chronocrafts.xyz/api/v1/getAllAddresses",
+          {
+            withCredentials: true,
+          }
         );
         setAddresses(data.addresses);
       } catch (error) {
@@ -46,7 +49,10 @@ export default function Profile() {
       if (isEditing) {
         await axios.put(
           `https://chronocrafts.xyz/api/v1/updateAddress/${addressForm.id}`,
-          addressForm
+          addressForm,
+          {
+            withCredentials: true,
+          }
         );
         toast("Address Updated Successfully!", {
           position: "bottom-center",
@@ -54,7 +60,10 @@ export default function Profile() {
       } else {
         await axios.post(
           "https://chronocrafts.xyz/api/v1/createAddress",
-          addressForm
+          addressForm,
+          {
+            withCredentials: true,
+          }
         );
         toast("Address Created Successfully!", {
           position: "bottom-center",
@@ -63,7 +72,10 @@ export default function Profile() {
 
       // Refresh addresses
       const { data } = await axios.get(
-        "https://chronocrafts.xyz/api/v1/getAllAddresses"
+        "https://chronocrafts.xyz/api/v1/getAllAddresses",
+        {
+          withCredentials: true,
+        }
       );
       setAddresses(data.addresses);
 
@@ -85,7 +97,12 @@ export default function Profile() {
   // Delete address
   const handleDeleteAddress = async (id) => {
     try {
-      await axios.delete(`https://chronocrafts.xyz/api/v1/deleteAddress/${id}`);
+      await axios.delete(
+        `https://chronocrafts.xyz/api/v1/deleteAddress/${id}`,
+        {
+          withCredentials: true,
+        }
+      );
       setAddresses((prev) => prev.filter((address) => address._id !== id));
       toast("Address Deleted Successfully!", {
         position: "bottom-center",
