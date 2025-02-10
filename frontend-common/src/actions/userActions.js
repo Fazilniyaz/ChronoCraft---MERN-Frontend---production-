@@ -137,6 +137,7 @@ export const register = (userData) => async (dispatch) => {
       headers: {
         "Content-type": "multipart/form-data",
       },
+      withCredentials: true,
     };
 
     const { data } = await axios.post(
@@ -188,6 +189,7 @@ export const updateProfile = (userData) => async (dispatch) => {
       headers: {
         "Content-type": "multipart/form-data",
       },
+      withCredentials: true,
     };
 
     const { data } = await axios.put(
@@ -211,6 +213,7 @@ export const updatePassword = (formData) => async (dispatch) => {
       headers: {
         "Content-type": "application/json",
       },
+      withCredentials: true,
     };
     await axios.put(
       `https://api.chronocrafts.xyz/api/v1/password/change`,
@@ -233,6 +236,7 @@ export const forgotPassword = (formData) => async (dispatch) => {
       headers: {
         "Content-type": "application/json",
       },
+      withCredentials: true,
     };
     const { data } = await axios.post(
       `https://api.chronocrafts.xyz/api/v1/password/forgot`,
@@ -255,6 +259,7 @@ export const resetPassword = (formData, token) => async (dispatch) => {
       headers: {
         "Content-type": "application/json",
       },
+      withCredentials: true,
     };
     const { data } = await axios.post(
       `https://api.chronocrafts.xyz/api/v1/password/reset/${token}`,
@@ -319,6 +324,7 @@ export const updateUser = (id, formData) => async (dispatch) => {
       headers: {
         "Content-type": "application/json",
       },
+      withCredentials: true,
     };
     await axios.put(
       `https://api.chronocrafts.xyz/api/v1/admin/user/${id}`,
@@ -360,6 +366,7 @@ export const verifyOtp = (email) => async (dispatch) => {
       headers: {
         "Content-type": "application/json",
       },
+      withCredentials: true,
     };
     const { data } = await axios.post(
       `https://api.chronocrafts.xyz/api/v1/register/otp`,
