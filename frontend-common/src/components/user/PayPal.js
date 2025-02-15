@@ -88,12 +88,15 @@ function Paypal() {
 
   const onCreateOrder = async () => {
     try {
-      const response = await fetch("/paypal/createorder", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        "https://api.chronocrafts.xyz/paypal/createorder",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       const data = await response.json();
       return data.orderId;
     } catch (error) {
@@ -136,12 +139,15 @@ function Paypal() {
     try {
       if (!data?.orderID) throw new Error("Invalid order ID");
 
-      const response = await fetch(`/paypal/capturepayment/${data.orderID}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `https://api.chronocrafts.xyz/paypal/capturepayment/${data.orderID}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       const result = await response.json();
       window.location.href = "https://api.chronocrafts.xyz/order/success";
