@@ -140,6 +140,7 @@ export const createReview = (reviewData) => async (dispatch) => {
     dispatch(createReviewRequest());
     const config = {
       headers: { "Content-type": "application/json" },
+      withCredentials: true,
     };
     const { data } = await axios.put(
       `https://api.chronocrafts.xyz/api/v1/review`,
