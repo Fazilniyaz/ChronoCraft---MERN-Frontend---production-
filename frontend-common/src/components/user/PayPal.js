@@ -7,6 +7,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { orderCompleted } from "../../slices/cartSlice";
 import { createOrder } from "../../actions/orderActions";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 function Paypal() {
   const navigate = useNavigate();
@@ -75,9 +76,33 @@ function Paypal() {
     getItemsFromDB();
   }, [boolean]);
 
-  const handlePayment = () => {
-    // Logic to handle order confirmation
+  const initialOptions = {
+    clientId:
+      "AYv3poJq2TuQ1mMNx5QcwvFEwJQpEv1PG-jTHMOgi4j176ZsdkRDaGLX4arSoBL88pMQo7srGw9msLxk",
+  };
 
+  const styles = {
+    shape: "rect",
+    layout: "vertical",
+  };
+
+  const onCreateOrder = async () => {
+    try {
+      const response = await fetch("/paypal/createorder", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      return data.orderId;
+    } catch (error) {
+      console.error("Error creating PayPal order:", error);
+      throw error;
+    }
+  };
+
+  const onApprove = async (data) => {
     try {
       async function paypal() {
         const { data } = await axios.post(
@@ -108,10 +133,69 @@ function Paypal() {
         position: "bottom-center",
       });
     }
+    try {
+      if (!data?.orderID) throw new Error("Invalid order ID");
 
-    // alert("Your order has been placed successfully!");
-    // navigate("/order-success"); // Redirect to success page
+      const response = await fetch(`/paypal/capturepayment/${data.orderID}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const result = await response.json();
+      window.location.href = "https://api.chronocrafts.xyz/order/success";
+    } catch (error) {
+      toast(error, {
+        type: "error",
+        position: "bottom-center",
+      });
+    }
   };
+
+  const onError = (error) => {
+    console.error("PayPal error", error);
+    window.location.href = "/";
+    window.alert(error);
+  };
+
+  // const handlePayment = () => {
+  //   // Logic to handle order confirmation
+
+  //   try {
+  //     async function paypal() {
+  //       const { data } = await axios.post(
+  //         `https://api.chronocrafts.xyz/api/v1/paymentViaPaypal`,
+  //         {
+  //           amount: order.totalPrice,
+  //           shipping: order.shippingInfo,
+  //         },
+  //         {
+  //           withCredentials: true,
+  //         }
+  //       );
+  //       console.log(data);
+  //     }
+  //     paypal();
+
+  //     dispatch(orderCompleted());
+  //     dispatch(createOrder(order));
+
+  //     navigate("/order/success");
+  //     toast("Payment Success!", {
+  //       type: "success",
+  //       position: "bottom-center",
+  //     });
+  //   } catch (err) {
+  //     toast(err, {
+  //       type: "error",
+  //       position: "bottom-center",
+  //     });
+  //   }
+
+  //   // alert("Your order has been placed successfully!");
+  //   // navigate("/order-success"); // Redirect to success page
+  // };
 
   return (
     <Fragment>
@@ -175,7 +259,7 @@ function Paypal() {
                 Number(orderInfo?.taxPrice)}
             </p>
           </div>
-          <button
+          {/* <button
             onClick={handlePayment}
             style={{
               background: "#ff7e5f",
@@ -191,7 +275,15 @@ function Paypal() {
             onMouseOut={(e) => (e.target.style.background = "#ff7e5f")}
           >
             Pay Now
-          </button>
+          </button> */}
+          <PayPalScriptProvider options={initialOptions}>
+            <PayPalButtons
+              style={styles}
+              createOrder={onCreateOrder}
+              onApprove={onApprove}
+              onError={onError}
+            />
+          </PayPalScriptProvider>
         </div>
       </div>
     </Fragment>
