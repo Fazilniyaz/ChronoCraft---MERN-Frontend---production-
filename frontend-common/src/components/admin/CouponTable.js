@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { Modal, Button } from "react-bootstrap";
 
 export default function CouponTable() {
   const [coupons, setCoupons] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedCouponId, setSelectedCouponId] = useState(null);
 
   // Fetch coupons on component load
   useEffect(() => {
@@ -25,24 +28,33 @@ export default function CouponTable() {
     fetchCoupons();
   }, []);
 
-  // Delete a coupon
-  const handleDelete = async (couponId) => {
-    if (window.confirm("Are you sure you want to delete this coupon?")) {
-      try {
-        await axios.delete(
-          `https://api.chronocrafts.xyz/api/v1/delete/${couponId}`,
-          {
-            withCredentials: true,
-          }
-        );
-        toast.success("Coupon deleted successfully.");
-        setCoupons(coupons.filter((coupon) => coupon._id !== couponId)); // Update state
-      } catch (error) {
-        toast.error(
-          error.response?.data?.message || "Failed to delete coupon."
-        );
-      }
+  // Open modal for confirmation
+  const openModal = (couponId) => {
+    setSelectedCouponId(couponId);
+    setShowModal(true);
+  };
+
+  // Close modal
+  const closeModal = () => {
+    setShowModal(false);
+    setSelectedCouponId(null);
+  };
+
+  // Confirm delete
+  const confirmDelete = async () => {
+    try {
+      await axios.delete(
+        `https://api.chronocrafts.xyz/api/v1/delete/${selectedCouponId}`,
+        {
+          withCredentials: true,
+        }
+      );
+      toast.success("Coupon deleted successfully.");
+      setCoupons(coupons.filter((coupon) => coupon._id !== selectedCouponId));
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Failed to delete coupon.");
     }
+    closeModal();
   };
 
   return (
@@ -67,7 +79,7 @@ export default function CouponTable() {
                 <td>
                   <button
                     className="btn btn-danger btn-sm"
-                    onClick={() => handleDelete(coupon._id)}
+                    onClick={() => openModal(coupon._id)}
                   >
                     Delete
                   </button>
@@ -83,6 +95,32 @@ export default function CouponTable() {
           )}
         </tbody>
       </table>
+
+      <Modal
+        show={showModal}
+        onHide={closeModal}
+        centered
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Delete Coupon</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div style={{ fontSize: "1.1rem", color: "#333" }}>
+            Are you sure you want to delete this coupon? This action cannot be
+            undone.
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={closeModal}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={confirmDelete}>
+            Yes, Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

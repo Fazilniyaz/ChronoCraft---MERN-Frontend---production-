@@ -1,5 +1,5 @@
-import { Fragment, useEffect } from "react";
-import { Button } from "react-bootstrap";
+import { Fragment, useEffect, useState } from "react";
+import { Button, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { deleteUser, getUsers } from "../../actions/userActions";
@@ -18,6 +18,25 @@ export default function UserList() {
   } = useSelector((state) => state.userState);
 
   const dispatch = useDispatch();
+
+  // Modal state
+  const [showModal, setShowModal] = useState(false);
+  const [selectedUserId, setSelectedUserId] = useState(null);
+
+  const openModal = (userId) => {
+    setSelectedUserId(userId);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setSelectedUserId(null);
+  };
+
+  const confirmDelete = () => {
+    dispatch(deleteUser(selectedUserId));
+    closeModal();
+  };
 
   const setUsers = () => {
     const data = {
@@ -60,11 +79,10 @@ export default function UserList() {
         actions: (
           <Fragment>
             <Link to={`/admin/user/${user._id}`} className="btn btn-primary">
-              {" "}
               <i className="fa fa-pencil"></i>
             </Link>
             <Button
-              onClick={(e) => deleteHandler(e, user._id)}
+              onClick={() => openModal(user._id)}
               className="btn btn-danger py-1 px-2 ml-2"
             >
               <i className="fa fa-trash"></i>
@@ -75,11 +93,6 @@ export default function UserList() {
     });
 
     return data;
-  };
-
-  const deleteHandler = (e, id) => {
-    e.target.disabled = true;
-    dispatch(deleteUser(id));
   };
 
   useEffect(() => {
@@ -125,6 +138,31 @@ export default function UserList() {
             />
           )}
         </Fragment>
+        <Modal
+          show={showModal}
+          onHide={closeModal}
+          centered
+          backdrop="static"
+          keyboard={false}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Delete User</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div style={{ fontSize: "1.1rem", color: "#333" }}>
+              Are you sure you want to delete this user? This action cannot be
+              undone.
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={closeModal}>
+              Cancel
+            </Button>
+            <Button variant="danger" onClick={confirmDelete}>
+              Yes, Delete
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     </div>
   );
